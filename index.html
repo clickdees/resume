@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joseph Olaopa - Senior Shopify Developer</title>
+    <style>
+       @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+      
+        :root {
+            --bg-color: #f0f0f0;
+            --text-color: #1a1a1a;
+            --container-bg: #ffffff;
+            --border-color: #1a1a1a;
+            --hover-bg: #f9f9f9;
+            --menu-bg: #1a1a1a;
+            --menu-text: #ffffff;
+            --skill-bg: #e0e0e0;
+            --skill-fill: #1a1a1a;
+            --hamburger-text: #fff;
+        }
+
+        body.dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #f0f0f0;
+            --container-bg: #2a2a2a;
+            --border-color: #f0f0f0;
+            --hover-bg: #333333;
+            --menu-bg: #f0f0f0;
+            --menu-text: #1a1a1a;
+            --skill-bg: #444444;
+            --skill-fill: #f0f0f0;
+            --hamburger-text: #fff;
+        }
+
+        body {
+            font-family: "Space Mono", monospace;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-size: 16px;
+        }
+
+      body.pdf-generation .container {animation: none !important;}
+      
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: var(--container-bg);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+           
+        }
+        h1, h2, h3 {
+            color: var(--text-color);
+        }
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        h2 {
+            font-size: 1.8em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .contact-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .contact-info p {
+            margin: 5px 0;
+        }
+        .skill-bar {
+            background-color: var(--skill-bg);
+            height: 10px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        .skill-level {
+            background-color: var(--skill-fill);
+            height: 100%;
+            position: absolute;
+            transition: width 1s ease-in-out;
+        }
+        .experience-item, .education-item, .project-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            background-color: var(--container-bg);
+            transition: all 0.3s ease;
+        }
+        .experience-item:hover, .education-item:hover, .project-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: var(--hover-bg);
+        }
+        .date {
+            font-style: italic;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+             margin-left: 2%;
+        }
+        ul li::before {
+            content: ">";
+            color: var(--text-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* Menu Styles */
+        .menu-container {
+            background-color: var(--menu-bg);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+        .menu {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        .menu li {
+            margin: 0 15px;
+        }
+        .menu li a {
+            color: var(--menu-text);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .menu li a:hover {
+            opacity: 0.8;
+        }
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            color: var(--hamburger-text);
+            cursor: pointer;
+            background-color: #000;
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 0.6rem;
+            right: 20px;
+            z-index: 1001;
+        }
+        .dark-mode-toggle input {
+            display: none;
+        }
+        .dark-mode-toggle label {
+            cursor: pointer;
+            padding: 10px;
+            background-color: var(--container-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+        .dark-mode-toggle label:hover {
+            background-color: var(--hover-bg);
+        }
+
+           .download-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .download-btn {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background-color: #18a90b;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+            }
+            .menu.active {
+                display: flex;
+            }
+            .menu li {
+                margin: 10px 0;
+            }
+            .hamburger {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 10px;
+            }
+            .dark-mode-toggle {
+                top: 60px;
+            }
+            .container{margin: 0;}
+            .menu-container {padding: 0;}
+        }
+
+
+       .no-animation {
+            animation: none; /* Disable animations */
+        }
+    </style>
+</head>
+<body>
+    <div class="dark-mode-toggle">
+        <input type="checkbox" id="darkModeToggle">
+        <label for="darkModeToggle">🌓</label>
+    </div>
+
+    <div class="menu-container">
+        <button class="hamburger">☰</button>
+        <ul class="menu">
+            <li><a href="#summary">Summary</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#languages">Languages</a></li>
+        </ul>
+    </div>
+
+     <div id="download" class="download-section fade-in">
+            <button id="downloadPdf" class="download-btn">Download PDF</button>
+    </div>
+    <div class="container">
+        <h1 class="fade-in">Joseph Olaopa</h1>
+        <div class="contact-info fade-in">
+            <p>📞 +234-9067025933 | 📧 joey.olaopa@gmail.com</p>
+        </div>
+        
+        <div class="section fade-in" id="summary">
+            <h2>Summary</h2>
+            <p>As a seasoned full stack web solutions application developer/engineer, I specialize in crafting innovative front-end functionalities and robust Shopify solutions. My expertise spans the spectrum of web development, from custom theme design and Shopify app development to implementing intricate Shopify Plus scripts.</p>
+            <p>My technical skill set includes proficiency in HTML5, CSS3 (including Tailwind CSS and Bootstrap), Liquid (Shopify's templating language), and JavaScript (including frameworks like jQuery, React.js, and Vue.js). Additionally, I am well-versed in backend technologies such as Ruby (on Rails and Sinatra), Node.js (with Express.js), and MongoDB. I have a strong grasp of APIs and GraphQL, enabling me to integrate diverse systems seamlessly.</p>
+            <p>I thrive on creating user-centric, scalable solutions that drive business growth and enhance online experiences. With a keen eye for design and a passion for leveraging cutting-edge technologies, I am committed to delivering high-quality, custom-tailored web solutions that exceed client expectations.</p>
+        </div>
+        
+        <div class="section fade-in" id="experience">
+            <h2>Experience</h2>
+            <div class="experience-item">
+                <h3>Shopify Developer</h3>
+                <p class="date">May 2012 - Present (12 years 1 month)</p>
+                <p><em>AppsLabz Solutions, Lagos, Nigeria</em></p>
+                <ul>
+                    <li>Develop and customize Shopify themes and apps.</li>
+                    <li>Implement and manage Shopify Plus scripts using Ruby.</li>
+                    <li>Enhance user experience with advanced HTML, CSS, JavaScript, and Liquid code.</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3>Shopify Developer</h3>
+                <p class="date">November 2016 - 2022 (6 years)</p>
+                <p><em>Storetasker, Remote</em></p>
+                <ul>
+                    <li>Develop and customize Shopify themes and apps.</li>
+                    <li>Implement and manage Shopify Plus scripts using Ruby.</li>
+                    <li>Enhance user experience with advanced HTML, CSS, JavaScript, and Liquid code.</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3>Independent Software Consultant</h3>
+                <p class="date">November 2014 - 2018 (4 years)</p>
+                <p><em>Multrateq Solutions</em></p>
+                <ul>
+                    <li>Worked on web and mobile application projects such as TopScore, a mobile application that uses gamification to teach, encourage and facilitate students studying for major academic and professional examinations.</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3>Lead Web Engineer</h3>
+                <p class="date">November 2010 - 2017 (7 years)</p>
+                <p><em>ATIB College for Further Education</em></p>
+                <ul>
+                    <li>Head of Web Development and Developer of the ATIB College for Further Education Distance learning e-Campus Portal. Built the e-campus portal and other e-learning extensions.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section fade-in" id="education">
+            <h2>Education</h2>
+            <div class="education-item">
+                <h3>BSc. Computer Science</h3>
+                <p><em>Lagos State University</em></p>
+                <p class="date">2013</p>
+                <p>Grade: Second Class Upper Division</p>
+            </div>
+            <div class="education-item">
+                <h3>Professional Graduate Diploma in Information Technology</h3>
+                <p><em>BCS, The Chartered Institute for IT</em></p>
+                <p class="date">2011 - 2012</p>
+                <p>Activities and societies: The Certificate in IT is recognised by Ofqual as a level 6 qualification and is the academic equivalent to year one of a university honours degree in England.</p>
+            </div>
+            <div class="education-item">
+                <h3>Diploma in Information Technology</h3>
+                <p><em>BCS, The Chartered Institute for IT</em></p>
+                <p class="date">2010 - 2011</p>
+                <p>Activities and societies: The Certificate in IT is recognised by Ofqual as a level 5 qualification and is the academic equivalent to year one of a university honours degree in England.</p>
+            </div>
+            <div class="education-item">
+                <h3>Certificate in Information Technology</h3>
+                <p><em>BCS, The Chartered Institute for IT</em></p>
+                <p class="date">2009 - 2010</p>
+                <p>Activities and societies: The Certificate in IT is recognised by Ofqual as a level 4 qualification and is the academic equivalent to year one of a university honours degree in England.</p>
+            </div>
+            <div class="education-item">
+                <h3>Honours Diploma in Network Engineering, Computer Systems Networking and Telecommunications</h3>
+                <p><em>National Institute of Information Technology</em></p>
+                <p class="date">2007 - 2008</p>
+                <p>Grade: Excellent</p>
+                <p>Graduated with honours</p>
+            </div>
+            <div class="education-item">
+                <h3>Certificate in Network Engineering, Computer Systems Networking and Telecommunications</h3>
+                <p><em>National Institute of Information Technology</em></p>
+                <p class="date">2006 - 2007</p>
+                <p>Grade: Excellent</p>
+            </div>
+        </div>
+        
+        <div class="section fade-in" id="skills">
+            <h2>Skills</h2>
+            <div>
+                <h3>Frontend</h3>
+                <div class="skill-bar">
+                    <div class="skill-level" style="width: 90%;"></div>
+                </div>
+                <p>HTML5, CSS3, JavaScript, jQuery, React.js, Liquid</p>
+            </div>
+            <div>
+                <h3>Backend</h3>
+                <div class="skill-bar">
+                    <div class="skill-level" style="width: 80%;"></div>
+                </div>
+                <p>Ruby (Ruby on Rails, Sinatra), Node.js (Express.js), MongoDB</p>
+            </div>
+            <div>
+                <h3>Shopify</h3>
+                <div class="skill-bar">
+                    <div class="skill-level" style="width: 85%;"></div>
+                </div>
+                <p>Theme development, app development, Shopify Plus scripts</p>
+            </div>
+            <div>
+                <h3>APIs</h3>
+                <div class="skill-bar">
+                    <div class="skill-level" style="width: 75%;"></div>
+                </div>
+                <p>REST, GraphQL</p>
+            </div>
+        </div>
+        
+        <div class="section fade-in" id="languages">
+            <h2>Languages</h2>
+            <p>English, Yoruba</p>
+        </div>
+
+       
+    </div>
+   
+    <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const skillLevels = document.querySelectorAll('.skill-level');
+        skillLevels.forEach((level) => {
+            const width = level.style.width;
+            level.style.width = '0%';
+            setTimeout(() => {
+                level.style.width = width;
+            }, 100);
+        });
+
+        const fadeInElements = document.querySelectorAll('.fade-in');
+        fadeInElements.forEach((element, index) => {
+            element.style.animationDelay = `${index * 0.2}s`;
+        });
+
+        // Add a subtle background pattern
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        document.body.appendChild(canvas);
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.zIndex = '-1';
+
+        function drawPattern() {
+            ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--bg-color');
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--text-color');
+            ctx.globalAlpha = 0.1;
+            ctx.lineWidth = 1;
+
+            for (let x = 0; x < canvas.width; x += 20) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+
+            for (let y = 0; y < canvas.height; y += 20) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+        }
+
+        drawPattern();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            drawPattern();
+        });
+
+        // Menu toggle functionality
+        const hamburger = document.querySelector('.hamburger');
+        const menu = document.querySelector('.menu');
+
+        hamburger.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        // Smooth scrolling for menu items
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+                // Close menu on mobile after clicking
+                if (window.innerWidth <= 768) {
+                    menu.classList.remove('active');
+                }
+            });
+        });
+
+        // Dark mode toggle functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('change', () => {
+            body.classList.toggle('dark-mode');
+            drawPattern();
+        });
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            darkModeToggle.checked = true;
+            drawPattern();
+        }
+
+        // Save dark mode preference
+        darkModeToggle.addEventListener('change', () => {
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', null);
+            }
+        });
+    });
+    </script>
+  <script src="https://cdn.shopify.com/s/files/1/0577/1863/6678/files/html2pdf.bundle.min.js?v=1723823897"></script>
+ <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const downloadBtn = document.getElementById('downloadPdf');
+            const cont = document.querySelector('.container');
+
+            downloadBtn.addEventListener('click', () => {
+                const elementsToAnimate = document.querySelectorAll('.fade-in');
+
+                // Change the animation class for each element
+                elementsToAnimate.forEach((element) => {
+                    element.classList.remove('fade-in'); // Remove the fade-in class
+                    element.classList.add('no-animation'); // Add the no-animation class
+                });
+
+                const options = {
+                    margin: 0.5,
+                    filename: 'resume.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+
+                html2pdf().from(cont).set(options).save().then(() => {
+                    // Re-add the fade-in class for each element
+                    elementsToAnimate.forEach((element) => {
+                        element.classList.remove('no-animation'); // Remove the no-animation class
+                        element.classList.add('fade-in'); // Re-add the fade-in class
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
